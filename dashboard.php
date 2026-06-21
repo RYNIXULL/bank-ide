@@ -5,7 +5,7 @@ if (!isLoggedIn()) {
     redirect('login.php');
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_COOKIE['user_id'];
 
 // Get user stats
 $stmt = $pdo->prepare("SELECT COUNT(*) as total_ide FROM bim_ide WHERE id_user = ?");
@@ -34,7 +34,7 @@ $my_ideas = $stmt->fetchAll();
 <main class="main-content">
     <div class="container">
         <div class="flex justify-between align-center mb-2">
-            <h2>Selamat Datang, <?php echo htmlspecialchars($_SESSION['nama']); ?>!</h2>
+            <h2>Selamat Datang, <?php echo htmlspecialchars($_COOKIE['nama'] ?? 'Pengguna'); ?>!</h2>
             <a href="create_ide.php" class="btn btn-primary">+ Tambah Ide Baru</a>
         </div>
 

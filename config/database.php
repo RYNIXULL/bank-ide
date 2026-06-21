@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start(); // Disabled for Vercel Serverless compatibility
 
 $host = 'localhost';
 $dbname = 'bank_ide_db';
@@ -29,13 +29,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// Helper functions
+// Helper functions (Vercel Serverless Compatible)
 function isLoggedIn() {
-    return isset($_SESSION['user_id']);
+    return isset($_COOKIE['user_id']);
 }
 
 function isAdmin() {
-    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    return isset($_COOKIE['role']) && $_COOKIE['role'] === 'admin';
 }
 
 function redirect($url) {

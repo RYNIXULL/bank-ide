@@ -6,7 +6,7 @@ if (!isLoggedIn()) {
 }
 
 $id_ide = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$user_id = $_SESSION['user_id'];
+$user_id = $_COOKIE['user_id'];
 $is_admin = isAdmin();
 
 // Check if ide exists and belongs to user or is admin

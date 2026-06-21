@@ -16,9 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id_user'];
-        $_SESSION['nama'] = $user['nama'];
-        $_SESSION['role'] = $user['role'];
+        // Vercel Serverless Compatible Login (Cookies instead of PHP Sessions)
+        setcookie('user_id', $user['id_user'], time() + 86400 * 30, '/');
+        setcookie('nama', $user['nama'], time() + 86400 * 30, '/');
+        setcookie('role', $user['role'], time() + 86400 * 30, '/');
 
         redirect($user['role'] === 'admin' ? 'admin/index.php' : 'dashboard.php');
     } else {

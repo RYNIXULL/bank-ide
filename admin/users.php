@@ -7,7 +7,7 @@ if (!isLoggedIn() || !isAdmin()) {
 
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
-    if ($id != $_SESSION['user_id']) { // Prevent self-delete
+    if ($id != $_COOKIE['user_id']) { // Prevent self-delete
         $stmt = $pdo->prepare("DELETE FROM bim_users WHERE id_user = ?");
         $stmt->execute([$id]);
         redirect('users.php?msg=deleted');
@@ -57,7 +57,7 @@ $users = $stmt->fetchAll();
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td><span class="card-category" style="background: <?php echo $user['role'] == 'admin' ? '#fef08a' : '#e0e7ff'; ?>; color: <?php echo $user['role'] == 'admin' ? '#854d0e' : '#3730a3'; ?>"><?php echo strtoupper($user['role']); ?></span></td>
                         <td>
-                            <?php if($user['id_user'] != $_SESSION['user_id']): ?>
+                            <?php if($user['id_user'] != $_COOKIE['user_id']): ?>
                                 <a href="users.php?delete=<?php echo $user['id_user']; ?>" class="btn-delete" style="color: var(--danger); text-decoration: none;">Hapus</a>
                             <?php else: ?>
                                 <span class="text-muted">Anda (Admin)</span>

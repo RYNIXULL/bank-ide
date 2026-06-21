@@ -1,6 +1,7 @@
 <?php
 require_once 'config/database.php';
-session_unset();
-session_destroy();
+setcookie('user_id', '', time() - 3600, '/');
+setcookie('nama', '', time() - 3600, '/');
+setcookie('role', '', time() - 3600, '/');
 redirect('index.php');
 ?>

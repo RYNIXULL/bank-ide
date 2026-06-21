@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judul_ide = trim($_POST['judul_ide']);
     $deskripsi = trim($_POST['deskripsi']);
     $id_kategori = $_POST['id_kategori'];
-    $id_user = $_SESSION['user_id'];
+    $id_user = $_COOKIE['user_id'];
 
     if (empty($judul_ide) || empty($deskripsi) || empty($id_kategori)) {
         $error = 'Semua field harus diisi.';

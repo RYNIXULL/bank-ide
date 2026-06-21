@@ -21,7 +21,7 @@ if (!$ide) {
 // Handle Add Comment
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isLoggedIn() && isset($_POST['isi_komentar'])) {
     $isi_komentar = trim($_POST['isi_komentar']);
-    $id_user = $_SESSION['user_id'];
+    $id_user = $_COOKIE['user_id'];
     
     if (!empty($isi_komentar)) {
         $stmt = $pdo->prepare("INSERT INTO bim_komentar (isi_komentar, id_user, id_ide) VALUES (?, ?, ?)");

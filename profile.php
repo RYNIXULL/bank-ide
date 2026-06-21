@@ -5,7 +5,7 @@ if (!isLoggedIn()) {
     redirect('login.php');
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_COOKIE['user_id'];
 $error = '';
 $success = '';
 
@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $hashed = password_hash($password_baru, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("UPDATE bim_users SET nama = ?, password = ? WHERE id_user = ?");
                 $stmt->execute([$nama, $hashed, $user_id]);
-                $_SESSION['nama'] = $nama;
+                setcookie('nama', $nama, time() + 86400 * 30, '/');
                 $success = "Profil dan password berhasil diupdate.";
             }
         } else {
             $stmt = $pdo->prepare("UPDATE bim_users SET nama = ? WHERE id_user = ?");
             $stmt->execute([$nama, $user_id]);
-            $_SESSION['nama'] = $nama;
+            setcookie('nama', $nama, time() + 86400 * 30, '/');
             $success = "Profil berhasil diupdate.";
         }
     }
